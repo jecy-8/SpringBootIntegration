@@ -1,32 +1,48 @@
-############ mybatis-plus ÅäÖÃ
+##########################################################
+##################  æ‰€æœ‰profileå…±æœ‰çš„é…ç½®  #################
+##########################################################
+
+###################  springé…ç½®  ###################
+spring:
+  profiles:
+    active: dev
+
+###################  mybatis-plusé…ç½®  ###################
 mybatis-plus:
-  mapper-location:classpath*: /mapper/**Mapper.xml
-  # É¨ÃèÊµÌåÀà£¬¶à¸öpackageÖ®¼äÓÃ , ¸ô¿ª
-  type-aliases-package: com.example.springbootmybatis.entity
-
-  # È«¾ÖµÄÒ»Ğ©ÅäÖÃ
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  typeAliasesPackage: >
+    com.example.springbootmybatis.entity
   global-config:
-    # 0:Êı¾İ¿âID×ÔÔö  1£º×Ô¼ºÉèÖÃID  2£ºÈ«¾ÖÎ¨Ò»ID  3£ºÈ«¾ÖÎ¨Ò»ID£¨UUID£©
-    id-type: 0
-    # ÍÕ·åÏÂ»®Ïß×ª»»
-    db-column-underline: true
-    # #Ë¢ĞÂmapper
+    id-type: 0  # 0:æ•°æ®åº“IDè‡ªå¢   1:ç”¨æˆ·è¾“å…¥id  2:å…¨å±€å”¯ä¸€id(IdWorker)  3:å…¨å±€å”¯ä¸€ID(uuid)
+    db-column-underline: false
     refresh-mapper: true
-
   configuration:
     map-underscore-to-camel-case: true
-    # ÅäÖÃ»º´æµÄÈ«¾Ö¿ª¹Ø
-    cache-enabled: true
-    # ÑÓ³Ù¼ÓÔØ¿ª¹Ø
-    lazy-loading-enabled: true
-    # ¿ªÆô¶ÔÏóÑÓ³Ù¼ÓÔØ
-    multiple-result-sets-enabled: true
+    cache-enabled: true #é…ç½®çš„ç¼“å­˜çš„å…¨å±€å¼€å…³
+    lazyLoadingEnabled: true #å»¶æ—¶åŠ è½½çš„å¼€å…³
+    multipleResultSetsEnabled: true #å¼€å¯çš„è¯ï¼Œå»¶æ—¶åŠ è½½ä¸€ä¸ªå±æ€§æ—¶ä¼šåŠ è½½è¯¥å¯¹è±¡å…¨éƒ¨å±æ€§ï¼Œå¦åˆ™æŒ‰éœ€åŠ è½½å±æ€§
 
+logging:
+  level:
+    org.springframework.web.servlet: ERROR
 
-################# Spring ÅäÖÃ
+---
+
+#####################################################################
+########################  å¼€å‘ç¯å¢ƒprofile  ##########################
+#####################################################################
 spring:
+  profiles: dev
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/pos
-    data-username: root
-    data-password: 123
+      url: jdbc:mysql://127.0.0.1:3306/pos?serverTimezone=UTC&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
+      username: root
+      password: 123
 
+logging:
+  level:
+    ROOT: INFO
+    com:
+      xncoding: DEBUG
+  file: D:/logs/app.log
+server:
+  port: 9009
